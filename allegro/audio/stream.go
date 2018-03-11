@@ -7,9 +7,10 @@ import "C"
 import (
 	"errors"
 	"fmt"
-	"github.com/dradtke/go-allegro/allegro"
 	"io"
 	"unsafe"
+
+	"github.com/phrasz/nag/allegro"
 )
 
 var ErrNoAvailableFragments = errors.New("no available fragments for audio stream")

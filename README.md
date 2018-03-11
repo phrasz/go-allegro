@@ -1,34 +1,35 @@
-go-allegro
-==========
+NAG Bindings - New Allegro Go Bindings
+======================================
 
-[![GoDoc](https://godoc.org/github.com/dradtke/go-allegro?status.png)](https://godoc.org/github.com/dradtke/go-allegro)
+This library provides bindings for Allegro 5.2.
 
-This repository contains bindings for writing [Allegro 5](http://alleg.sourceforge.net) games in Go. Obviously, in order for them to work, you'll need to already have a working Allegro 5 development environment set up.
+The bindings are dependent upon a pre-installed Allegro development environment.
+This work extends the original work of [go-allegro](https://github.com/dradtke/go-allegro).
 
-Function documentation is included in the source, but it's pulled directly from Allegro's C API documentation, so not everything will line up as far as parameters and return values. However, the C API maps pretty well to the Go API, so if you're familiar with the patterns (e.g. `error`'s instead of boolean success values, multiple return values instead of output parameters, object functions as instance methods on structs), then it shouldn't be hard to figure out what's going on.
+The following functions are not implemented, due to coverage in Go.
 
-A number of Allegro functions are blacklisted (via the `blacklist` file) because they either a) overlap with existing Go functionality, like UTF-8 support, or b) are too low-level and probably shouldn't be implemented in Go anyway, like registering new bitmap loaders. These exceptions aside, the bindings officially have 100% method coverage as of Allegro 5.0.10. You can verify this by running `go test coverage_test.go`; any methods found in a header file that aren't covered somewhere in the bindings will show up as unit test failures.
+-
+-
+-
+-
 
-Branching
-=========
+The original bindiging had 100% coverage of Allegro 5.0.10.
 
-`master` is the default branch, but you should usually use one corresponding to your Allegro version. Check out the list of branches to see what's available.
+Test coverage
+-------------
+Run: `go test coverage_test.go`
 
-Installation
-============
+Linux Installation
+------------------
+Assuming Allegro 5.2 has been built, tun the following commands:
+1. cd && `pkg-config`
+2. go get -d github.com/dradtke/go-allegro`.
+3. `go install github.com/dradtke/go-allegro/allegro`
 
-Before installation, be sure to get the source by running `go get -d github.com/dradtke/go-allegro`.
-
-*Nix
-----
-
-Install Allegro 5 through your favorite package manager, ensure that it's registered with `pkg-config`, then run `go install github.com/dradtke/go-allegro/allegro`.
-
-Windows
+<!-- Windows Installation
 -------
-
-Download the Allegro 5 binaries [here](https://www.allegro.cc/files/) and extract the root folder somewhere.
-
-Set the `ALLEGRO_HOME` environment variable to this folder's absolute path, and set `ALLEGRO_VERSION` to the version of Allegro downloaded, e.g. 5.0.10. You can also optionally set `ALLEGRO_LIB` to reflect which version you want to link against; the default value is `monolith-static-mt-debug`.
-
-Once that's done, run the included `setenv.bat`, and if no errors were reported, then you can then build and install the library as usual.
+1. Set the `ALLEGRO_HOME` to this github.com/phrasz/go-allegro
+2. Set `ALLEGRO_VERSION` to the version of Allegro downloaded ( e.g., 5.0.10)
+3. (Optional) Set `ALLEGRO_LIB` to match which allegro version (default value is `monolith-static-mt-debug`).
+4. Run `setenv.bat`; if it successfully runs, then build and install the library
+-->

@@ -4,13 +4,14 @@ package main
 
 import (
 	"fmt"
-	"github.com/dradtke/go-allegro/allegro"
-	"github.com/dradtke/go-allegro/allegro/acodec"
-	"github.com/dradtke/go-allegro/allegro/audio"
 	"io"
 	"net/http"
 	"os"
 	"path"
+
+	"github.com/phrasz/nag/allegro"
+	"github.com/phrasz/nag/allegro/acodec"
+	"github.com/phrasz/nag/allegro/audio"
 )
 
 const SOUND_FILE = "http://www.kozco.com/tech/piano2.wav"

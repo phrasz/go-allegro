@@ -11,8 +11,9 @@ int get_stride() {
 import "C"
 import (
 	"errors"
-	"github.com/dradtke/go-allegro/allegro"
 	"unsafe"
+
+	"github.com/phrasz/nag/allegro"
 )
 
 func col(color allegro.Color) C.ALLEGRO_COLOR {

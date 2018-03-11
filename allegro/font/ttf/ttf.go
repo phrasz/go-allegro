@@ -8,9 +8,10 @@ import "C"
 import (
 	"errors"
 	"fmt"
-	"github.com/dradtke/go-allegro/allegro"
-	"github.com/dradtke/go-allegro/allegro/font"
 	"unsafe"
+
+	"github.com/phrasz/nag/allegro"
+	"github.com/phrasz/nag/allegro/font"
 )
 
 type TtfFlags int

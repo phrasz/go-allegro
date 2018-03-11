@@ -3,7 +3,7 @@
 package main
 
 import (
-	"github.com/dradtke/go-allegro/allegro"
+	"github.com/phrasz/nag/allegro"
 )
 
 const FPS int = 60

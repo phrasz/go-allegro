@@ -8,8 +8,9 @@ import "C"
 import (
 	"bytes"
 	"errors"
-	"github.com/dradtke/go-allegro/allegro"
 	"unsafe"
+
+	"github.com/phrasz/nag/allegro"
 )
 
 type FileMode int

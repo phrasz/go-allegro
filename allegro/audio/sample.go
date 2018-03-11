@@ -7,7 +7,8 @@ import "C"
 import (
 	"errors"
 	"fmt"
-	"github.com/dradtke/go-allegro/allegro"
+
+	"github.com/phrasz/nag/allegro"
 )
 
 type Sample C.ALLEGRO_SAMPLE

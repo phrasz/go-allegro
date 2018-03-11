@@ -1,3 +1,4 @@
+//From: https://github.com/dradtke/go-allegro
 package main
 
 import (
@@ -231,6 +232,11 @@ func TestCoverage(t *testing.T) {
 		t.Fatal(err.Error())
 	}
 	packageRoot := filepath.Join(cwd, "allegro")
+        upDirectory := strings.Replace(packageRoot, "/test/", "/", -1)
+
+        fmt.Printf("\n[TEST] Test folder is located: %s\n",packageRoot)
+        packageRoot = upDirectory
+        fmt.Printf("\n[TEST] Test folder is testing in folder: %s\n",packageRoot)
 
 	blacklist := getBlacklist()
 

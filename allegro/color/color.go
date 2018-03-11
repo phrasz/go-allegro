@@ -7,8 +7,9 @@ package color
 import "C"
 import (
 	"fmt"
-	"github.com/dradtke/go-allegro/allegro"
 	"unsafe"
+
+	"github.com/phrasz/nag/allegro"
 )
 
 func al(col C.ALLEGRO_COLOR) allegro.Color {

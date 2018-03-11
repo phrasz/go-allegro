@@ -5,8 +5,9 @@ package audio
 // #include "../util.c"
 import "C"
 import (
-	"github.com/dradtke/go-allegro/allegro"
 	"unsafe"
+
+	"github.com/phrasz/nag/allegro"
 )
 
 func init() {

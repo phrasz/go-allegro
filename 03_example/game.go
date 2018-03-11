@@ -3,9 +3,10 @@ package main
 
 import (
 	"fmt"
-	"github.com/dradtke/go-allegro/allegro"
 	"math"
 	"os"
+
+	"github.com/phrasz/nag/allegro"
 )
 
 const TILE_SIZE = 30

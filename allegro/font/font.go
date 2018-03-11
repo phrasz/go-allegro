@@ -8,8 +8,9 @@ import "C"
 import (
 	"errors"
 	"fmt"
-	"github.com/dradtke/go-allegro/allegro"
 	"unsafe"
+
+	"github.com/phrasz/nag/allegro"
 )
 
 type Font C.ALLEGRO_FONT
