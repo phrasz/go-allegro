@@ -14,11 +14,11 @@ import (
 	"github.com/phrasz/nag/allegro/audio"
 )
 
-const SOUND_FILE = "http://www.kozco.com/tech/piano2.wav"
+const soundFile = "http://www.kozco.com/tech/piano2.wav"
 
 func download(url string) (string, error) {
 	filename := path.Base(url)
-	fmt.Printf("downloading %s...", SOUND_FILE)
+	fmt.Printf("downloading %s...", soundFile)
 
 	if _, err := os.Stat(filename); !os.IsNotExist(err) {
 		fmt.Println("not necessary")
@@ -67,7 +67,7 @@ func main() {
 		audio.ReserveSamples(1)
 		defer audio.Uninstall()
 
-		if filename, err = download(SOUND_FILE); err != nil {
+		if filename, err = download(soundFile); err != nil {
 			panic(err)
 		}
 

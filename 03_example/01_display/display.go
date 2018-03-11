@@ -6,14 +6,14 @@ import (
 	"github.com/phrasz/nag/allegro"
 )
 
-const FPS int = 60
+const fps int = 60
 
 func main() {
 	allegro.Run(func() {
 		var (
 			display    *allegro.Display
 			eventQueue *allegro.EventQueue
-			running    bool = true
+			running    = true
 			err        error
 		)
 
@@ -34,8 +34,8 @@ func main() {
 			panic(err)
 		}
 
-		// Calculate the timeout value based on the desired FPS.
-		timeout := float64(1) / float64(FPS)
+		// Calculate the timeout value based on the desired fps.
+		timeout := float64(1) / float64(fps)
 
 		// Register event sources.
 		eventQueue.Register(display)
