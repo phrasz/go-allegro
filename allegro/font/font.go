@@ -18,6 +18,7 @@ type Font C.ALLEGRO_FONT
 type DrawFlags int
 
 const (
+	NO_KERNING              = C.ALLEGRO_NO_KERNING
 	ALIGN_LEFT    DrawFlags = C.ALLEGRO_ALIGN_LEFT
 	ALIGN_CENTRE            = C.ALLEGRO_ALIGN_CENTRE
 	ALIGN_RIGHT             = C.ALLEGRO_ALIGN_RIGHT
@@ -88,18 +89,21 @@ func LoadBitmapFont(filename string) (*Font, error) {
 // Creates a new font from an Allegro bitmap. You can delete the bitmap after
 // the function returns as the font will contain a copy for itself.
 func GrabFontFromBitmap(bmp *allegro.Bitmap, ranges [][2]int) (*Font, error) {
-	n_ranges := len(ranges) * 2
+	nRanges := len(ranges)
+	n_ranges := nRanges * 2
 	if n_ranges == 0 {
 		return nil, errors.New("no ranges specified")
 	}
 	c_ranges := make([]C.int, n_ranges)
+	//fmt.Printf("[nag][DEBUGGING] Current GFFBitmap range: 0 - %d\n", nRanges-1)
 	for i := 0; i < len(ranges); i++ {
-		for j := 0; j < len(ranges[i]); j++ {
+		for j := 0; j < 2; j++ { //len(ranges[i]); j++ {
+			//fmt.Printf("[nag][DEBUGGING] Adding Element: - (%d,%d)\n", i, j)
 			c_ranges[2*i+j] = C.int(ranges[i][j])
 		}
 	}
-	f := C.al_grab_font_from_bitmap((*C.ALLEGRO_BITMAP)(unsafe.Pointer(bmp)),
-		C.int(n_ranges), (*C.int)(unsafe.Pointer(&c_ranges[0])))
+
+	f := C.al_grab_font_from_bitmap((*C.ALLEGRO_BITMAP)(unsafe.Pointer(bmp)), C.int(nRanges), (*C.int)(unsafe.Pointer(&c_ranges[0])))
 	if f == nil {
 		return nil, errors.New("failed to grab font from bitmap")
 	}
@@ -200,3 +204,31 @@ func (f *Font) TextDimensions(text string) (bbx, bby, bbw, bbh int) {
 		&cbbx, &cbby, &cbbw, &cbbh)
 	return int(cbbx), int(cbby), int(cbbw), int(cbbh)
 }
+
+//From Font:
+//static int color_get_glyph_advance(ALLEGRO_FONT const *f, int codepoint1, int codepoint2)
+//static bool color_get_glyph_dimensions(ALLEGRO_FONT const *f, int codepoint, int *bbx, int *bby, int *bbw, int *bbh)
+
+//From Text.c
+//int al_get_glyph_width(const ALLEGRO_FONT *f, int codepoint)
+//bool al_get_glyph_dimensions(const ALLEGRO_FONT *f, int codepoint, int *bbx, int *bby, int *bbw, int *bbh)
+//bool al_get_glyph(const ALLEGRO_FONT *f, int prev_codepoint, int codepoint, ALLEGRO_GLYPH *glyph)
+//
+//
+
+//GetGlyphAdvance returns the width of next glyph?
+//int al_get_glyph_advance(const ALLEGRO_FONT *f, int codepoint1, int codepoint2)
+//int al_get_glyph_advance(const ALLEGRO_FONT *f, int codepoint1, int codepoint2)
+func GetGlyphAdvance(font *Font, codepoint1 int, codepoint2 int) int {
+	return int(C.al_get_glyph_advance((*C.ALLEGRO_FONT)(font), C.int(codepoint1), C.int(codepoint2)))
+}
+
+//DrawGlyph draws a glyph
+//int al_get_glyph_advance(const ALLEGRO_FONT *f, int codepoint1, int codepoint2)
+//void al_draw_glyph(const ALLEGRO_FONT *f, ALLEGRO_COLOR color, float x, float y, int codepoint)
+func DrawGlyph(font *Font, color allegro.Color, x float32, y float32, codepoint int) {
+	C.al_draw_glyph((*C.ALLEGRO_FONT)(font), *((*C.ALLEGRO_COLOR)(unsafe.Pointer(&color))), C.float(x), C.float(y), C.int(codepoint))
+	return
+}
+
+//font *Font, color allegro.Color, x1, x2, y, diff float32, flags DrawFlags, format string, a ...interface{}
